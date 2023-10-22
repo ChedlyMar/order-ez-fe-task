@@ -84,7 +84,7 @@ export default {
 }
 .ez-select__dropdown {
   li ul .ez-option {
-    padding-left: 46px;
+    padding-left: 24px;
   }
 }
 

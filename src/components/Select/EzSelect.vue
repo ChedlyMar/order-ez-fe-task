@@ -177,7 +177,7 @@ $dropdown-top: 8px;
 $dropdown-padding-x: 0;
 $dropdown-padding-y: 4px;
 
-$option-padding-x: 16px;
+$option-padding-x: 12px;
 $option-padding-y: 0;
 
 $label-font-size: 12px;

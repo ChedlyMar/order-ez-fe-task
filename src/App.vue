@@ -50,7 +50,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #2c3e50;
+  color: #252631;
+  font-size: 14px;
   margin-top: 60px;
 }
 </style>
