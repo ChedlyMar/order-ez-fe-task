@@ -8,7 +8,7 @@
     :value="selected"
     :selected="selected"
     :label="label"
-    :options="categories"
+    :options="data"
     @change="onChange"
   >
     <ul>
