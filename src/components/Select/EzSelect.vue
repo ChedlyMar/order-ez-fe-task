@@ -13,21 +13,6 @@
      -->
     <label class="ez-select__label" :for="id" v-if="label">{{ label }}</label>
     <!--
-      UNKNOWEN
-     -->
-    <!-- <select class="ez-select__select" :disabled="disabled" :id="id">
-      <option
-        v-for="option in options"
-        :key="option[valueField]"
-        :value="option[valueField]"
-        :selected="
-          selectedOption && option[valueField] === selectedOption[valueField]
-        "
-      >
-        {{ option[nameField] }}
-      </option>
-    </select> -->
-    <!--
       DROPDOWN SELECT
      -->
     <div :class="['ez-select__display-container', { border: expanded }]">
@@ -38,7 +23,6 @@
         ]"
       >
         {{ selected ? selected : "All categories" }}
-        <!-- {{ selectedOption && selectedOption[nameField] }} -->
       </div>
       <img v-if="expanded" src="../../assets/angle-up-solid.svg" />
       <img v-else src="../../assets/angle-down-solid.svg" />
