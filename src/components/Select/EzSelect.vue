@@ -1,9 +1,9 @@
 <template>
   <div
-      v-on="!disabled ? { click: toggle } : {}"
-      ref="select"
-      class="ez-select"
-      :class="[
+    v-on="!disabled ? { click: toggle } : {}"
+    ref="select"
+    class="ez-select"
+    :class="[
       { 'ez-select--full-width': isFullWidth },
       { 'ez-select--disabled': disabled },
     ]"
@@ -11,10 +11,10 @@
     <label class="ez-select__label" :for="id" v-if="label">{{ label }}</label>
     <select class="ez-select__select" :disabled="disabled" :id="id">
       <option
-          v-for="option in options"
-          :key="option[valueField]"
-          :value="option[valueField]"
-          :selected="
+        v-for="option in options"
+        :key="option[valueField]"
+        :value="option[valueField]"
+        :selected="
           selectedOption && option[valueField] === selectedOption[valueField]
         "
       >
@@ -24,7 +24,7 @@
     <div :class="['ez-select__display-container', { border: expanded }]">
       <slot name="display">
         <div
-            :class="[
+          :class="[
             'ez-select__display',
             { 'ez-select__display--placeholder': !selectedOption[valueField] },
           ]"
@@ -38,13 +38,12 @@
     <div class="ez-select__dropdown-container">
       <div v-if="expanded" class="ez-select__dropdown">
         <ez-option
-            v-for="option in options"
-            :key="option[valueField]"
-            :option="option"
-            :selected="
-              selectedOption &&
-              option[valueField] === selectedOption[valueField]
-            "
+          v-for="option in options"
+          :key="option[valueField]"
+          :option="option"
+          :selected="
+            selectedOption && option[valueField] === selectedOption[valueField]
+          "
         >
           {{ option[nameField] }}
         </ez-option>
@@ -129,9 +128,9 @@ export default {
     onCreated() {
       const firstOption = this.options.length ? this.options[0] : null;
       const value =
-          typeof this.value === "object"
-              ? this.value
-              : this.options.find((o) => o[this.valueField] === this.value);
+        typeof this.value === "object"
+          ? this.value
+          : this.options.find((o) => o[this.valueField] === this.value);
       this.selectedOption = value || firstOption;
       this.originalValue = this.selectedOption;
     },
@@ -140,9 +139,9 @@ export default {
     selected() {
       const firstOption = this.options.length ? this.options[0] : null;
       const value =
-          typeof this.selected === "object"
-              ? this.selected
-              : this.options.find((o) => o[this.valueField] === this.selected);
+        typeof this.selected === "object"
+          ? this.selected
+          : this.options.find((o) => o[this.valueField] === this.selected);
 
       this.selectedOption = value || firstOption;
       this.originalValue = this.selectedOption;
@@ -177,7 +176,7 @@ $dropdown-top: 8px;
 $dropdown-padding-x: 0;
 $dropdown-padding-y: 4px;
 
-$option-padding-x: 16px;
+$option-padding-x: 12px;
 $option-padding-y: 0;
 
 $label-font-size: 12px;
@@ -237,6 +236,12 @@ $selected-border-color: #4d7cfe;
     box-shadow: $dropdown-shadow;
     width: 100%;
     box-sizing: content-box;
+    /*
+      REFACTOR : FROM EzSelect.vue
+    */
+    li ul .ez-option {
+      padding-left: 24px;
+    }
   }
 
   &__dropdown-container {
@@ -252,7 +257,7 @@ $selected-border-color: #4d7cfe;
     background-color: $color-gray-F5;
     padding: $padding-y $padding-x;
     border-radius: $border-radius;
-    height: 100%;
+    height: 36px;
 
     &:hover {
       background-color: $color-hover;
@@ -285,7 +290,10 @@ $selected-border-color: #4d7cfe;
     overflow-x: hidden;
 
     &:hover {
-      background-color: $color-gray-b4;
+      /*
+        FIX COLOR
+      */
+      background-color: $color-gray-F5;
     }
 
     &--disabled {
@@ -294,6 +302,16 @@ $selected-border-color: #4d7cfe;
 
       &:hover {
         background-color: transparent;
+      }
+    }
+    /*
+      DISABLE HOVER STYLE TO PARENT CATEGORIE
+    */
+    &.parent {
+      font-weight: bold;
+      &:hover {
+        background-color: transparent;
+        cursor: default;
       }
     }
   }
@@ -313,3 +331,4 @@ $selected-border-color: #4d7cfe;
   border-radius: $border-radius;
 }
 </style>
+
