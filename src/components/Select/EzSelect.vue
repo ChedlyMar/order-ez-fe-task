@@ -19,7 +19,9 @@
       <div
         :class="[
           'ez-select__display',
-          { 'ez-select__display--placeholder': !selectedOption[valueField] },
+          {
+            'ez-select__display--placeholder': !selectedOption,
+          },
         ]"
       >
         {{ selected ? selected : "All categories" }}
@@ -93,19 +95,36 @@ export default {
     };
   },
   methods: {
+    /*
+      FUNCTION NAME : toggleDropdown()
+    */
     toggle() {
       this.expanded = !this.expanded;
     },
+    /*
+      setSelectedOption
+    */
     setValue(option, emitEvent = true) {
+      /*
+        ANY CHANGES ON selectedOption WILL CHANGE option
+        this.selectedOption = { ...option }
+        NO NEED TO CHANGE USE option (PROPS)
+      */
       this.selectedOption = option;
 
       if (emitEvent) {
         this.$emit("change", this.selectedOption);
       }
     },
+    /*
+      resetSelectedValue()
+    */
     reset() {
       this.setValue(this.originalValue, false);
     },
+    /*
+      closeDropdown()
+    */
     documentClick(e) {
       if (!this.$refs.select.contains(e.target)) {
         this.expanded = false;
@@ -123,12 +142,15 @@ export default {
   },
   watch: {
     selected() {
+      /*
+        SAME CODE AS onCreated()
+        REPLACE WITH "this.onCreated()"
+      */
       const firstOption = this.options.length ? this.options[0] : null;
       const value =
         typeof this.selected === "object"
           ? this.selected
           : this.options.find((o) => o[this.valueField] === this.selected);
-
       this.selectedOption = value || firstOption;
       this.originalValue = this.selectedOption;
     },
@@ -140,6 +162,10 @@ export default {
     this.onCreated();
   },
   mounted() {
+    /*
+      DEFINE VALUE ON DECLARATION
+      testId NOT REAL VALUE
+    */
     this.id = "testId";
     window.addEventListener("click", this.documentClick);
   },
@@ -266,7 +292,9 @@ $selected-border-color: #4d7cfe;
       color: $label-color;
     }
   }
-
+  /*
+    BETTER TO PUT ez-option STYLE IN EzOption COMPONENT
+  */
   :deep() .ez-option {
     padding: $option-padding-y $option-padding-x;
     white-space: nowrap;
@@ -277,19 +305,14 @@ $selected-border-color: #4d7cfe;
       background-color: $color-gray-F5;
     }
 
+    /* FIXED DISABLED COLOR & FONT */
     &--disabled {
       cursor: default;
-      opacity: 0.5;
+      font-weight: bold;
+      color: #252631;
 
       &:hover {
         background-color: transparent;
-      }
-    }
-    &.parent {
-      font-weight: bold;
-      &:hover {
-        background-color: transparent;
-        cursor: default;
       }
     }
   }

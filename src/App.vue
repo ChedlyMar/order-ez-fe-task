@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <h1>OrderEz Task</h1>
-    <EzCategoryDropdown
-      :data="categoryData"
-      :selected="selectedCategory"
-      @change="handleCategoryChange"
-    />
+    <h2 v-if="loadingCategories">Loading ...</h2>
+    <div v-else>
+      <EzCategoryDropdown
+        :data="categoryData"
+        :selected="selectedCategory"
+        @change="handleCategoryChange"
+      />
+    </div>
   </div>
 </template>
 
@@ -23,21 +26,25 @@ export default {
     return {
       categoryData: [],
       selectedCategory: null,
+      loadingCategories: false,
     };
   },
   methods: {
     handleCategoryChange(selectedCategory) {
       this.selectedCategory = selectedCategory.name;
-      console.log(selectedCategory.name);
+      console.log("selectedCategory: ", this.selectedCategory);
     },
   },
   async created() {
     try {
+      this.loadingCategories = true;
       this.categoryData = sortCategoryWithChildrenByName(
         await fetchCategories()
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      this.loadingCategories = false;
     }
   },
 };
