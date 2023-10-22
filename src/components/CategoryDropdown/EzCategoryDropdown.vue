@@ -77,14 +77,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-:deep() .ez-select__display-container {
-  height: 36px;
-}
-.ez-select__dropdown {
-  li ul .ez-option {
-    padding-left: 24px;
-  }
-}
-</style>

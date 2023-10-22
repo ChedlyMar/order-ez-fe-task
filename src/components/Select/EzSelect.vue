@@ -238,6 +238,10 @@ $selected-border-color: #4d7cfe;
     box-shadow: $dropdown-shadow;
     width: 100%;
     box-sizing: content-box;
+
+    li ul .ez-option {
+      padding-left: 24px;
+    }
   }
 
   &__dropdown-container {
@@ -253,7 +257,7 @@ $selected-border-color: #4d7cfe;
     background-color: $color-gray-F5;
     padding: $padding-y $padding-x;
     border-radius: $border-radius;
-    height: 100%;
+    height: 36px;
 
     &:hover {
       background-color: $color-hover;

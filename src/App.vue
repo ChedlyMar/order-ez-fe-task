@@ -36,7 +36,6 @@ export default {
       this.categoryData = sortCategoryWithChildrenByName(
         await fetchCategories()
       );
-      // this.selectedCategory = this.categoryData[0].children[0].name;
     } catch (error) {
       console.log(error);
     }
