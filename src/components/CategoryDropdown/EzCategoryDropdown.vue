@@ -1,15 +1,15 @@
 <template>
   <ez-select
-      ref="select"
-      class="input-group"
-      :name="name"
-      :disabled="disabled"
-      :isFullWidth="isFullWidth"
-      :value="selected"
-      :selected="selected"
-      :label="label"
-      :options="categories"
-      @change="onChange"
+    ref="select"
+    class="input-group"
+    :name="name"
+    :disabled="disabled"
+    :isFullWidth="isFullWidth"
+    :value="selected"
+    :selected="selected"
+    :label="label"
+    :options="categories"
+    @change="onChange"
   >
     <ul>
       <li v-for="option in data" :key="option.id">
@@ -28,9 +28,10 @@
 </template>
 
 <script>
-import EzSelect, { EzOption } from '@/components/Select';
+import EzSelect, { EzOption } from "@/components/Select";
 
 export default {
+  name: "EzCategoryDropdown",
   components: {
     EzSelect,
     EzOption,
@@ -81,7 +82,7 @@ export default {
     sortByName(a, b) {
       const aName = a.name.toLowerCase();
       const bName = b.name.toLowerCase();
-      return aName !== bName ? bName < aName ? -1 : 1 : 0;
+      return aName !== bName ? (bName < aName ? -1 : 1) : 0;
     },
     onChange(value) {
       this.$emit("change", value);
