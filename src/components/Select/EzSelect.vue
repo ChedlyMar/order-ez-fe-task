@@ -15,7 +15,7 @@
     <!--
       UNKNOWEN
      -->
-    <select class="ez-select__select" :disabled="disabled" :id="id">
+    <!-- <select class="ez-select__select" :disabled="disabled" :id="id">
       <option
         v-for="option in options"
         :key="option[valueField]"
@@ -26,7 +26,7 @@
       >
         {{ option[nameField] }}
       </option>
-    </select>
+    </select> -->
     <!--
       DROPDOWN SELECT
      -->
@@ -37,7 +37,8 @@
           { 'ez-select__display--placeholder': !selectedOption[valueField] },
         ]"
       >
-        {{ selectedOption && selectedOption[nameField] }}
+        {{ selected ? selected : "All categories" }}
+        <!-- {{ selectedOption && selectedOption[nameField] }} -->
       </div>
       <img v-if="expanded" src="../../assets/angle-up-solid.svg" />
       <img v-else src="../../assets/angle-down-solid.svg" />
@@ -285,7 +286,7 @@ $selected-border-color: #4d7cfe;
     overflow-x: hidden;
 
     &:hover {
-      background-color: $color-gray-b4;
+      background-color: $color-gray-F5;
     }
 
     &--disabled {
@@ -294,6 +295,13 @@ $selected-border-color: #4d7cfe;
 
       &:hover {
         background-color: transparent;
+      }
+    }
+    &.parent {
+      font-weight: bold;
+      &:hover {
+        background-color: transparent;
+        cursor: default;
       }
     }
   }

@@ -87,8 +87,4 @@ export default {
     padding-left: 24px;
   }
 }
-
-.parent {
-  font-weight: bold;
-}
 </style>
