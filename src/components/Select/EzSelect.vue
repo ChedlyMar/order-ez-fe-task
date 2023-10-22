@@ -1,53 +1,53 @@
 <template>
   <div
-      v-on="!disabled ? { click: toggle } : {}"
-      ref="select"
-      class="ez-select"
-      :class="[
+    v-on="!disabled ? { click: toggle } : {}"
+    ref="select"
+    class="ez-select"
+    :class="[
       { 'ez-select--full-width': isFullWidth },
       { 'ez-select--disabled': disabled },
     ]"
   >
+    <!--
+      LABEL
+     -->
     <label class="ez-select__label" :for="id" v-if="label">{{ label }}</label>
+    <!--
+      UNKNOWEN
+     -->
     <select class="ez-select__select" :disabled="disabled" :id="id">
       <option
-          v-for="option in options"
-          :key="option[valueField]"
-          :value="option[valueField]"
-          :selected="
+        v-for="option in options"
+        :key="option[valueField]"
+        :value="option[valueField]"
+        :selected="
           selectedOption && option[valueField] === selectedOption[valueField]
         "
       >
         {{ option[nameField] }}
       </option>
     </select>
+    <!--
+      DROPDOWN SELECT
+     -->
     <div :class="['ez-select__display-container', { border: expanded }]">
-      <slot name="display">
-        <div
-            :class="[
-            'ez-select__display',
-            { 'ez-select__display--placeholder': !selectedOption[valueField] },
-          ]"
-        >
-          {{ selectedOption && selectedOption[nameField] }}
-        </div>
-        <img v-if="expanded" src="../../assets/angle-up-solid.svg" />
-        <img v-else src="../../assets/angle-down-solid.svg" />
-      </slot>
+      <div
+        :class="[
+          'ez-select__display',
+          { 'ez-select__display--placeholder': !selectedOption[valueField] },
+        ]"
+      >
+        {{ selectedOption && selectedOption[nameField] }}
+      </div>
+      <img v-if="expanded" src="../../assets/angle-up-solid.svg" />
+      <img v-else src="../../assets/angle-down-solid.svg" />
     </div>
+    <!--
+      DROPDOWN LIST
+     -->
     <div class="ez-select__dropdown-container">
       <div v-if="expanded" class="ez-select__dropdown">
-        <ez-option
-            v-for="option in options"
-            :key="option[valueField]"
-            :option="option"
-            :selected="
-              selectedOption &&
-              option[valueField] === selectedOption[valueField]
-            "
-        >
-          {{ option[nameField] }}
-        </ez-option>
+        <slot name="display"></slot>
       </div>
     </div>
   </div>
@@ -129,9 +129,9 @@ export default {
     onCreated() {
       const firstOption = this.options.length ? this.options[0] : null;
       const value =
-          typeof this.value === "object"
-              ? this.value
-              : this.options.find((o) => o[this.valueField] === this.value);
+        typeof this.value === "object"
+          ? this.value
+          : this.options.find((o) => o[this.valueField] === this.value);
       this.selectedOption = value || firstOption;
       this.originalValue = this.selectedOption;
     },
@@ -140,9 +140,9 @@ export default {
     selected() {
       const firstOption = this.options.length ? this.options[0] : null;
       const value =
-          typeof this.selected === "object"
-              ? this.selected
-              : this.options.find((o) => o[this.valueField] === this.selected);
+        typeof this.selected === "object"
+          ? this.selected
+          : this.options.find((o) => o[this.valueField] === this.selected);
 
       this.selectedOption = value || firstOption;
       this.originalValue = this.selectedOption;

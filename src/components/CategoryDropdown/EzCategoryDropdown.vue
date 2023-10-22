@@ -11,19 +11,21 @@
     :options="data"
     @change="onChange"
   >
-    <ul>
-      <li v-for="option in data" :key="option.id">
-        <ez-option class="parent" :option="option">
-          {{ option.name }}
-        </ez-option>
+    <template v-slot:display>
+      <ul>
+        <li v-for="option in data" :key="option.id">
+          <ez-option class="parent" :option="option">
+            {{ option.name }}
+          </ez-option>
 
-        <ul v-if="option.children && option.children.length">
-          <li v-for="child in option.children" :key="child.id">
-            <ez-option :option="child">{{ child.name }}</ez-option>
-          </li>
-        </ul>
-      </li>
-    </ul>
+          <ul v-if="option.children && option.children.length">
+            <li v-for="child in option.children" :key="child.id">
+              <ez-option :option="child">{{ child.name }}</ez-option>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </template>
   </ez-select>
 </template>
 
@@ -65,25 +67,7 @@ export default {
       type: String,
     },
   },
-  // computed: {
-  //   categories() {
-  //     let categories = [];
-  //     for (let i = 0; i < this.data.length; i++) {
-  //       const category = this.data[i];
-  //       categories.push(category);
-  //       for (let j = 0; j < category.children.length; j++) {
-  //         categories.push(category.children[j]);
-  //       }
-  //     }
-  //     return categories.sort(this.sortByName);
-  //   },
-  // },
   methods: {
-    // sortByName(a, b) {
-    //   const aName = a.name.toLowerCase();
-    //   const bName = b.name.toLowerCase();
-    //   return aName !== bName ? (bName < aName ? -1 : 1) : 0;
-    // },
     onChange(value) {
       this.$emit("change", value);
     },
