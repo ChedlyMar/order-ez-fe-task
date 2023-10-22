@@ -26,12 +26,17 @@ export default {
     };
   },
   methods: {
-    handleCategoryChange(selectedCategory) {},
+    handleCategoryChange(selectedCategory) {
+      this.selectedCategory = selectedCategory.name;
+      console.log(selectedCategory.name);
+    },
   },
   async created() {
     try {
-      this.categoryData = await fetchCategories();
-      this.categoryData = sortCategoryWithChildrenByName(this.categoryData);
+      this.categoryData = sortCategoryWithChildrenByName(
+        await fetchCategories()
+      );
+      // this.selectedCategory = this.categoryData[0].children[0].name;
     } catch (error) {
       console.log(error);
     }
