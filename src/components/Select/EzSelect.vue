@@ -8,7 +8,13 @@
       { 'ez-select--disabled': disabled },
     ]"
   >
+    <!--
+      LABEL
+    -->
     <label class="ez-select__label" :for="id" v-if="label">{{ label }}</label>
+    <!--
+      UNKNOWEN
+     -->
     <select class="ez-select__select" :disabled="disabled" :id="id">
       <option
         v-for="option in options"
@@ -21,6 +27,9 @@
         {{ option[nameField] }}
       </option>
     </select>
+    <!--
+      DROPDOWN SELECT
+     -->
     <div :class="['ez-select__display-container', { border: expanded }]">
       <slot name="display">
         <div
@@ -35,6 +44,9 @@
         <img v-else src="../../assets/angle-down-solid.svg" />
       </slot>
     </div>
+    <!--
+      CATEGORIES LIST
+     -->
     <div class="ez-select__dropdown-container">
       <div v-if="expanded" class="ez-select__dropdown">
         <ez-option

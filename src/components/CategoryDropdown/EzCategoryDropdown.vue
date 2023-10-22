@@ -79,11 +79,14 @@ export default {
   //   },
   // },
   methods: {
-    // sortByName(a, b) {
-    //   const aName = a.name.toLowerCase();
-    //   const bName = b.name.toLowerCase();
-    //   return aName !== bName ? (bName < aName ? -1 : 1) : 0;
-    // },
+    /*
+      FIXED IN HELPER FUNCTION
+    */
+    sortByName(a, b) {
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+      return aName !== bName ? (bName < aName ? -1 : 1) : 0;
+    },
     onChange(value) {
       this.$emit("change", value);
     },
