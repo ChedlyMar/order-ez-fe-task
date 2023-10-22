@@ -65,25 +65,25 @@ export default {
       type: String,
     },
   },
-  computed: {
-    categories() {
-      let categories = [];
-      for (let i = 0; i < this.data.length; i++) {
-        const category = this.data[i];
-        categories.push(category);
-        for (let j = 0; j < category.children.length; j++) {
-          categories.push(category.children[j]);
-        }
-      }
-      return categories.sort(this.sortByName);
-    },
-  },
+  // computed: {
+  //   categories() {
+  //     let categories = [];
+  //     for (let i = 0; i < this.data.length; i++) {
+  //       const category = this.data[i];
+  //       categories.push(category);
+  //       for (let j = 0; j < category.children.length; j++) {
+  //         categories.push(category.children[j]);
+  //       }
+  //     }
+  //     return categories.sort(this.sortByName);
+  //   },
+  // },
   methods: {
-    sortByName(a, b) {
-      const aName = a.name.toLowerCase();
-      const bName = b.name.toLowerCase();
-      return aName !== bName ? (bName < aName ? -1 : 1) : 0;
-    },
+    // sortByName(a, b) {
+    //   const aName = a.name.toLowerCase();
+    //   const bName = b.name.toLowerCase();
+    //   return aName !== bName ? (bName < aName ? -1 : 1) : 0;
+    // },
     onChange(value) {
       this.$emit("change", value);
     },

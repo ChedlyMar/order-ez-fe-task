@@ -12,6 +12,7 @@
 <script>
 import EzCategoryDropdown from "./components/CategoryDropdown/EzCategoryDropdown.vue";
 import { fetchCategories } from "./api/categorie";
+import { sortCategoryWithChildrenByName } from "./helpers/category";
 
 export default {
   name: "App",
@@ -30,6 +31,7 @@ export default {
   async created() {
     try {
       this.categoryData = await fetchCategories();
+      this.categoryData = sortCategoryWithChildrenByName(this.categoryData);
     } catch (error) {
       console.log(error);
     }
