@@ -1,6 +1,6 @@
 <template>
   <!--
-    USE OBJECT TO PASS PROPS IF WE HAVE 3 OR MORE (RECOMEDATION)
+    USE OBJECT TO PASS PROPS IF WE HAVE 3 OR MORE --NOT MANDATORY
    -->
   <ez-select
     ref="select"
@@ -22,7 +22,11 @@
           </ez-option>
 
           <ul v-if="option.children && option.children.length">
-            <li v-for="child in option.children" :key="child.id">
+            <li
+              v-for="child in option.children"
+              :key="child.id"
+              @click="onChange(child)"
+            >
               <ez-option :option="child">{{ child.name }}</ez-option>
             </li>
           </ul>
@@ -47,6 +51,9 @@ export default {
     EzOption,
   },
   props: {
+    /*
+      CHANGE data TO categories OR categoryList
+    */
     data: {
       type: Array,
       required: true,

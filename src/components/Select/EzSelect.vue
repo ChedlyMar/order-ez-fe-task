@@ -1,4 +1,5 @@
 <template>
+  <!-- USE @click="toggleDropdown" -->
   <div
     v-on="!disabled ? { click: toggle } : {}"
     ref="select"
@@ -26,6 +27,10 @@
       >
         {{ selected ? selected : "All categories" }}
       </div>
+      <!--
+        USE COMPUTED FOR IMAGE SOURCE
+        :src="require(`@/${imgSrc}`)"
+       -->
       <img v-if="expanded" src="../../assets/angle-up-solid.svg" />
       <img v-else src="../../assets/angle-down-solid.svg" />
     </div>
@@ -81,6 +86,9 @@ export default {
       type: String,
     },
   },
+  /*
+    NO NEED provide/inject
+  */
   provide() {
     return {
       [SELECT_OPTION]: this.setValue,
@@ -99,7 +107,7 @@ export default {
       FUNCTION NAME : toggleDropdown()
     */
     toggle() {
-      this.expanded = !this.expanded;
+      if (!this.disabled) this.expanded = !this.expanded;
     },
     /*
       setSelectedOption
@@ -108,7 +116,7 @@ export default {
       /*
         ANY CHANGES ON selectedOption WILL CHANGE option
         this.selectedOption = { ...option }
-        NO NEED TO CHANGE USE option (PROPS)
+        NO NEED TO CHANGE USE option (PROPS) directly
       */
       this.selectedOption = option;
 
@@ -176,6 +184,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/*
+  DEFINE STYLES THAT ARE SCOPED TO THE CURRENT COMPONENT
+  USE WEBPACK TO SHARE VARIABLE FILE
+*/
 $input-height: 36px;
 $input-width: 360px;
 $border-radius: 3px;
