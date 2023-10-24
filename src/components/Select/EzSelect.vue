@@ -1,7 +1,7 @@
 <template>
   <!-- USE @click="toggleDropdown" -->
+  <!-- v-on="!disabled ? { click: toggle } : {}" -->
   <div
-    v-on="!disabled ? { click: toggle } : {}"
     ref="select"
     class="ez-select"
     :class="[
@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       id: null,
-      expanded: false,
+      expanded: true,
       selectedOption: null,
       originalValue: null,
     };
@@ -135,7 +135,7 @@ export default {
     */
     documentClick(e) {
       if (!this.$refs.select.contains(e.target)) {
-        this.expanded = false;
+        // this.expanded = false;
       }
     },
     onCreated() {

@@ -12,10 +12,11 @@
     :selected="selected"
     :label="label"
     :options="data"
-    @change="onChange"
   >
+    <!-- @change="onChange" -->
     <template v-slot:display>
       <ul>
+        <input type="checkbox" @change="toggleSellectAll" />Sellect all
         <li v-for="option in data" :key="option.id">
           <ez-option :disabled="true" :option="option">
             {{ option.name }}
@@ -27,7 +28,13 @@
               :key="child.id"
               @click="onChange(child)"
             >
-              <ez-option :option="child">{{ child.name }}</ez-option>
+              <!-- CHECKBOX -->
+              <ez-option :option="child"
+                ><input
+                  type="checkbox"
+                  :checked="checkedCategories.includes(child.id)"
+                />{{ child.name }}</ez-option
+              >
             </li>
           </ul>
         </li>
@@ -85,13 +92,39 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      checkedCategories: [],
+    };
+  },
   methods: {
     onChange(value) {
-      this.$emit("change", value);
+      console.log(this.checkedCategories.includes(value.id));
+      if (!this.checkedCategories.includes(value.id))
+        this.checkedCategories = [...this.checkedCategories, value.id];
+      else
+        this.checkedCategories = this.checkedCategories.filter(
+          (id) => id != value.id
+        );
+      // this.$emit("change", value);
     },
     reset() {
       this.$refs.select.reset();
     },
+    checkCategory(category) {
+      console.log("checkCategory", checkCategory);
+    },
+    toggleSellectAll() {
+      this.checkedCategories = this.data
+        .map((category) => category.children.map((child) => child.id))
+        .flat();
+      console.log(this.checkedCategories);
+    },
   },
 };
 </script>
+<style scoped>
+.checkbox-groupe {
+  display: flex;
+}
+</style>
