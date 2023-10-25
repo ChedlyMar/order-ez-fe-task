@@ -105,7 +105,6 @@ export default {
   },
   methods: {
     onChange(value) {
-      console.log(this.checkedCategories.includes(value.id));
       if (!this.checkedCategories.includes(value.id))
         this.checkedCategories = [...this.checkedCategories, value.id];
       else
@@ -129,7 +128,6 @@ export default {
       } else {
         this.checkedCategories = [];
       }
-      console.log(this.checkedCategories);
     },
   },
 };
