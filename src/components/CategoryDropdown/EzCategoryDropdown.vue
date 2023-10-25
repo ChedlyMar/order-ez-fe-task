@@ -16,7 +16,12 @@
     <!-- @change="onChange" -->
     <template v-slot:display>
       <ul>
-        <input type="checkbox" @change="toggleSellectAll" />Sellect all
+        <li @click="toggleSellectAll">
+          <ez-option :option="{}"
+            ><input type="checkbox" :checked="sellectAll" />Sellect
+            all</ez-option
+          >
+        </li>
         <li v-for="option in data" :key="option.id">
           <ez-option :disabled="true" :option="option">
             {{ option.name }}
@@ -95,6 +100,7 @@ export default {
   data() {
     return {
       checkedCategories: [],
+      sellectAll: false,
     };
   },
   methods: {
@@ -115,9 +121,14 @@ export default {
       console.log("checkCategory", checkCategory);
     },
     toggleSellectAll() {
-      this.checkedCategories = this.data
-        .map((category) => category.children.map((child) => child.id))
-        .flat();
+      this.sellectAll = !this.sellectAll;
+      if (this.sellectAll) {
+        this.checkedCategories = this.data
+          .map((category) => category.children.map((child) => child.id))
+          .flat();
+      } else {
+        this.checkedCategories = [];
+      }
       console.log(this.checkedCategories);
     },
   },
